@@ -1,6 +1,6 @@
 galaxy_info:
   author: jooho lee
-  description: Openshift TAM in Toronto
+  description: This role help resize an image to specific size. Basically, it uses ImageMagick package --size option.
   company: your company (optional)
 
   # If the issue tracker for your role is not on github, uncomment the
