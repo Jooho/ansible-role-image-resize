@@ -27,7 +27,7 @@ None
 Example Playbook
 ----------------
 ~~~
-- name: Resize Image
+- name: Example Playbook
   hosts: localhost
   gather_facts: false
 
