@@ -17,10 +17,19 @@
     set_fact: input_img="/tmp/{{input_img}}"
     when: "{{use_default_img}}"
 
+  - name: Check if the input_img exist
+    stat: path={{input_img}}
+    register: stat_input_img_exist
+
+  - name: if the input_img does not exit,it fail
+    fail: msg="Input Image does not exist, please check it"
+    when: stat_input_img_exist.stat.exists == false
+
   - name: Check if the output_img exist
     stat: path={{output_img}}
     register: stat_output_img_exist
 
   - name: Resize image with specific size
     command: convert {{input_img}} -resize {{size}} {{output_img}}
-    when: stat_output_img_exist.stat.exists == true and "{{force != true}}"
+    when: stat_output_img_exist.stat.exists == false  or  "{{force != true}}"
+
