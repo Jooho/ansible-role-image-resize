@@ -1,0 +1,5 @@
+[all]
+ansible-role-image-resize ansible_connection=docker
+
+[group1]
+ansible-role-image-resize

@@ -1,0 +1,7 @@
+---
+# defaults file for ansible-role-image-resize
+#
+input_img: "sample-openshift-ori.png"
+output_img: "/tmp/sample-openshift-ori-resize.png"
+size: 193x44
+force: false
