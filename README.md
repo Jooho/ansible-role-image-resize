@@ -26,7 +26,7 @@ None
 
 Example Playbook
 ----------------
-
+~~~
 - name: Resize Image
   hosts: localhost
   gather_facts: false
@@ -34,7 +34,7 @@ Example Playbook
   roles:
    - { role: resize_image }
    #- { role: resize_image, input_img: "original-image.png", output_img: "resize-image.png", size: "193x44", force: "true" }
-
+~~~
 License
 -------
 
