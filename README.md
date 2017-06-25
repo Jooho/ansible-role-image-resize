@@ -32,8 +32,8 @@ Example Playbook
   gather_facts: false
 
   roles:
-   - { role: resize_image }
-   #- { role: resize_image, input_img: "original-image.png", output_img: "resize-image.png", size: "193x44", force: "true" }
+   - { role: Jooho.image_resize }
+   #- { role: Jooho.image_resize, input_img: "original-image.png", output_img: "resize-image.png", size: "193x44", force: "true" }
 ~~~
 License
 -------
