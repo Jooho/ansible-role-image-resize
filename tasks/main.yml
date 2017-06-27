@@ -6,7 +6,8 @@
     register: installed_imagemagick
 
   - name: Add use_default_img=true if new image is not specified.
-    set_fact: "use_default_img=true"
+    set_fact: 
+      "use_default_img=true"
     when: "{{input_img == 'sample-openshift-ori.png'}}"
 
   - name: Copy sample image if new image is not specified.
@@ -31,5 +32,5 @@
 
   - name: Resize image with specific size
     command: convert {{input_img}} -resize {{size}} {{output_img}}
-    when: stat_output_img_exist.stat.exists == false  or  "{{force != true}}"
+    when: stat_output_img_exist.stat.exists == false  or  "{{force}}"
 
