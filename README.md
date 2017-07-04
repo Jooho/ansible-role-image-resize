@@ -16,7 +16,7 @@ Role Variables
 | input_img               | sample-openshift-ori.png              |         yes          | Original Image InputPath                                                    |
 | output_img              | /tmp/sample-openshift-ori-resize.png  |         yes          | Resized Image Output Path                                                   |
 | size                    | 193x144                               |         yes          | Resized Image Size                                                          |
-| force                   | false                                 |         no           | Overwrite Exist Image                                                       |
+| overwrite_force         | false                                 |         no           | Overwrite Exist Image                                                       |
 
 
 Dependencies
@@ -33,7 +33,7 @@ Example Playbook
 
   roles:
    - { role: Jooho.image-resize }
-   #- { role: Jooho.image-resize, input_img: "original-image.png", output_img: "resize-image.png", size: "193x44", force: "true" }
+   #- { role: Jooho.image-resize, input_img: "original-image.png", output_img: "resize-image.png", size: "193x44", overwrite_force: "true" }
 ~~~
 License
 -------
