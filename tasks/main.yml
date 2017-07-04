@@ -1,31 +1,31 @@
 ---
 # tasks file for ansible-role-image-resize
 
-#  - name: Install ImageMagick package
-#    yum: name=ImageMagick state=present
-#    register: installed_imagemagick
-#
+  - name: Install ImageMagick package
+    yum: name=ImageMagick state=present
+    register: installed_imagemagick
+
   - name: Add use_default_img=true if new image is not specified.
     set_fact: 
       "use_default_img=true"
     when: input_img == 'sample-openshift-ori.png'
-#
-#  - name: Copy sample image if new image is not specified.
-#    copy: src=sample-openshift-ori.png dest=/tmp/
-#    when: use_default_img
-#
+
+  - name: Copy sample image if new image is not specified.
+    copy: src=sample-openshift-ori.png dest=/tmp/
+    when: use_default_img
+
   - name: Change input_img path when sample image is used.
     set_fact: input_img="/tmp/{{input_img}}"
     when: use_default_img
-#
-#  - name: Check if the input_img exist
-#    stat: path={{input_img}}
-#    register: stat_input_img_exist
-#
-#  - name: if the input_img does not exit,it fail
-#    fail: msg="Input Image does not exist, please check it"
-#    when: stat_input_img_exist.stat.exists == false
-#
+
+  - name: Check if the input_img exist
+    stat: path={{input_img}}
+    register: stat_input_img_exist
+
+  - name: if the input_img does not exit,it fail
+    fail: msg="Input Image does not exist, please check it"
+    when: stat_input_img_exist.stat.exists == false
+
   - name: Check if the output_img exist
     stat: path={{output_img}}
     register: stat_output_img_exist
