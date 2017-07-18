@@ -13,10 +13,11 @@ Role Variables
 
 | Name                    | Default value                         |        Requird       | Description                                                                 |
 |-------------------------|---------------------------------------|----------------------|-----------------------------------------------------------------------------|
-| input_img               | sample-openshift-ori.png              |         yes          | Original Image InputPath                                                    |
-| output_img              | /tmp/sample-openshift-ori-resize.png  |         yes          | Resized Image Output Path                                                   |
-| size                    | 193x144                               |         yes          | Resized Image Size                                                          |
+| input_img               | sample-openshift-ori.png              |         no           | Original Image InputPath                                                    |
+| output_img              | /tmp/sample-openshift-ori-resize.png  |         no           | Resized Image Output Path                                                   |
+| size                    | 193x144                               |         no           | Resized Image Size                                                          |
 | overwrite_force         | false                                 |         no           | Overwrite Exist Image                                                       |
+| temp_dir	          | /tmp	                          |         no           | Temp directory
 
 
 Dependencies

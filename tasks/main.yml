@@ -5,21 +5,26 @@
     yum: name=ImageMagick state=present
     register: installed_imagemagick
 
-  - name: Add use_default_img=true if new image is not specified.
+  - name: Add use_default_img=false if new image is specified.
     set_fact: 
-      "use_default_img=true"
-    when: input_img == 'sample-openshift-ori.png'
+      "use_default_img=false"
+    when: input_img != 'sample-openshift-ori.png'
 
   - name: Copy sample image if new image is not specified.
-    copy: src=sample-openshift-ori.png dest=/tmp/
+    copy: src=sample-openshift-ori.png dest={{temp_dir}}
     when: use_default_img
 
   - name: Change input_img path when sample image is used.
-    set_fact: input_img="/tmp/{{input_img}}"
+    set_fact: input_img="{{temp_dir}}/{{input_img}}"
     when: use_default_img
 
+  - name: Copy source image to target vm
+    synchronize: src={{input_img}} dest={{temp_dir}}/{{input_img |basename}}
+    delegate_to: localhost
+    when: not use_default_img
+
   - name: Check if the input_img exist
-    stat: path={{input_img}}
+    stat: path={{temp_dir}}/{{input_img|basename}}
     register: stat_input_img_exist
 
   - name: if the input_img does not exit,it fail
@@ -31,6 +36,6 @@
     register: stat_output_img_exist
 
   - name: Resize image with specific size
-    command: convert {{input_img}} -resize {{size}} {{output_img}}
-    when: "stat_output_img_exist.stat.exists == false  or overwrite_force"
+    command: convert {{temp_dir}}/{{input_img|basename}} -resize {{size}} {{output_img}}
+    when: "stat_output_img_exist.stat.exists == false or overwrite_force"
 
