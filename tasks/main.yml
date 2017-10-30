@@ -24,14 +24,14 @@
     block: 
        - name: Source image path
          set_fact:
-             input_img: "{{temp_dir}}/{{input_img |basename}}"
+             input_img_file: "{{temp_dir}}/{{input_img |basename}}"
         
        - name: Source image path
          set_fact:
              output_img: "{{temp_dir}}/resized_{{input_img |basename}}"
 
   - name: Check if the input_img exist
-    stat: "path={{input_img}}"
+    stat: "path={{input_img_file}}"
     register: stat_input_img_exist
 
   - name: if the input_img does not exit,it fail
@@ -39,11 +39,11 @@
     when: stat_input_img_exist.stat.exists == false
 
   - name: Check if the output_img exist
-    stat: path={{output_img}}
+    stat: "path={{output_img}}"
     register: stat_output_img_exist
 
   - name: Resize image with specific size
-    command: convert {{temp_dir}}/{{input_img|basename}} -resize {{size}} {{output_img}}
+    command: "convert {{input_img_file}} -resize {{size}} {{output_img}}"
     when: "stat_output_img_exist.stat.exists == false or overwrite_force"
 
   - name: Change permissions the output image
