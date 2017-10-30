@@ -4,18 +4,15 @@
   - name: Install ImageMagick package
     yum: name=ImageMagick state=present
     register: installed_imagemagick
+  
 
   - name: Add use_default_img=false if new image is specified.
     set_fact: 
-      "use_default_img=false"
+       use_default_img: false
     when: input_img != 'sample-openshift-ori.png'
 
   - name: Copy sample image if new image is not specified.
     copy: src=sample-openshift-ori.png dest={{temp_dir}}
-    when: use_default_img
-
-  - name: Change input_img path when sample image is used.
-    set_fact: input_img="{{temp_dir}}/{{input_img}}"
     when: use_default_img
 
   - name: Copy source image to target vm
@@ -23,8 +20,18 @@
     delegate_to: localhost
     when: not use_default_img
 
+  - name: Set image path
+    block: 
+       - name: Source image path
+         set_fact:
+             input_img: "{{temp_dir}}/{{input_img |basename}}"
+        
+       - name: Source image path
+         set_fact:
+             output_img: "{{temp_dir}}/resized_{{input_img |basename}}"
+
   - name: Check if the input_img exist
-    stat: path={{temp_dir}}/{{input_img|basename}}
+    stat: "path={{input_img}}"
     register: stat_input_img_exist
 
   - name: if the input_img does not exit,it fail
@@ -41,4 +48,5 @@
 
   - name: Change permissions the output image
     file: "path={{output_img}} mode=0777"
+
 
