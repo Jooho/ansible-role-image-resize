@@ -39,3 +39,6 @@
     command: convert {{temp_dir}}/{{input_img|basename}} -resize {{size}} {{output_img}}
     when: "stat_output_img_exist.stat.exists == false or overwrite_force"
 
+  - name: Change permissions the output image
+    file: "path={{output_img}} mode=0777"
+
