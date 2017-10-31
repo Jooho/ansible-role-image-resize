@@ -29,6 +29,7 @@
        - name: Source image path
          set_fact:
              output_img: "{{temp_dir}}/resized_{{input_img |basename}}"
+    run_once: yes
 
   - name: Check if the input_img exist
     stat: "path={{input_img_file}}"
