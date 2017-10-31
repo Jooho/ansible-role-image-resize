@@ -17,8 +17,8 @@
 
   - name: Copy source image to target vm
     synchronize: src={{input_img}} dest={{temp_dir}}/{{input_img |basename}}
-    delegate_to: localhost
     when: not use_default_img
+    become: yes
 
   - name: Set image path
     block: 
