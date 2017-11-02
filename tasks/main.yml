@@ -4,6 +4,7 @@
   - name: Install ImageMagick package
     yum: name=ImageMagick state=present
     register: installed_imagemagick
+    become: yes
   
 
   - name: Add use_default_img=false if new image is specified.
