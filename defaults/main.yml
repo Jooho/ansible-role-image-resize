@@ -3,7 +3,7 @@
 #
 input_img: "sample-openshift-ori.png"
 output_img: "sample-openshift-ori-resize.png"
-size: 193x44
+size: 193x144
 overwrite_force: true
 use_default_img: true
 temp_dir: "/tmp"
